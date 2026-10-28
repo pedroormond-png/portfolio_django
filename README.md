@@ -11,6 +11,10 @@ O relatório e o banco preenchido `db.sqlite3` são fornecidos **separadamente**
 - Branch `categories`, criada após o merge anterior, também integrada.
 - Capturas de tela e SQL em `docs/`.
 
+## Início facilitado no Windows
+
+Com o banco de dados no mesmo diretório que `manage.py`, clique duas vezes no arquivo **INICIAR_NO_WINDOWS.bat**. Ele cria um ambiente Python, instala dependências, executa migrações e abre a página local. A instalação exige Python 3 e conexão à internet.
+
 ## Execução local (Windows: PowerShell)
 
 ```powershell
