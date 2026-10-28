@@ -1,0 +1,4 @@
+Os arquivos resultado_qN.html e resultado_qN.png apresentam consultas executadas
+com Python sqlite3 diretamente sobre o db.sqlite3 entregue separadamente.
+Os resultados integrais (sem truncamento visual de colunas) estao em
+resultados_efetivos.txt. Para reproduzir no DB Browser, abra consultas.sql.

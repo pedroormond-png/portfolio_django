@@ -1,0 +1,6 @@
+PREVIAS VISUAIS - NAO SAO PRINTS DO DJANGO EM EXECUCAO
+
+As imagens e paginas HTML nesta pasta simulam a interface usando o CSS do template
+base e os dados reais do banco SQLite, para apoiar a revisao do visual.
+Antes de entregar o trabalho, substitua essas imagens no relatorio pelas capturas
+reais feitas com o Django em execucao. O relatorio PDF inclui este aviso.
