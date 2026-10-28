@@ -1,11 +1,11 @@
 {% extends "base.html" %}
-{% block title %}Post · Portfólio{% endblock %}
+{% block title %}{% if object %}Editar post{% else %}Criar post{% endif %} · Portfólio{% endblock %}
 {% block content %}<section class="panel">
   <h2>{% if object %}Editar post{% else %}Criar post{% endif %}</h2>
+  <p class="muted">O campo de conteúdo aceita HTML (ex.: &lt;p&gt;Texto&lt;/p&gt;).</p>
   <form method="post">{% csrf_token %}
-    <p><label for="id_title">Título</label><input type="text" id="id_title" name="title" value="{{ object.title|default:'' }}"></p>
-    <p><label for="id_content">Conteúdo HTML</label><textarea id="id_content" name="content">{{ object.content|default:'' }}</textarea></p>
-    <button type="submit" class="button">Salvar post</button>
+    {{ form.as_p }}
+    <button class="button" type="submit">Salvar post</button>
     <a class="button secondary" href="{% url 'posts:post_list' %}">Cancelar</a>
   </form>
 </section>{% endblock %}
