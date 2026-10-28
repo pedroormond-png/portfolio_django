@@ -60,21 +60,22 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
     template_name = "posts/comment_form.html"
 
     def dispatch(self, request, *args, **kwargs):
-        self.post = get_object_or_404(Post, pk=kwargs["post_id"])
+        # Nao usar self.post: isso substituiria o metodo HTTP post() da CreateView.
+        self.target_post = get_object_or_404(Post, pk=kwargs["post_id"])
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["post"] = self.post
+        context["post"] = self.target_post
         return context
 
     def form_valid(self, form):
-        form.instance.post = self.post
+        form.instance.post = self.target_post
         form.instance.author = self.request.user
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy("posts:post_detail", kwargs={"pk": self.post.pk})
+        return reverse_lazy("posts:post_detail", kwargs={"pk": self.target_post.pk})
 
 
 class CategoryListView(ListView):
