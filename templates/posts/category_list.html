@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Categorias · Portfólio{% endblock %}
+{% block content %}
+<div class="page-head"><h2>Categorias dos projetos</h2></div>
+<div class="grid">{% for category in categories %}
+  <article class="card"><h3><a href="{% url 'posts:category_detail' category.pk %}">{{ category.name }}</a></h3>
+    <p class="muted">{{ category.description }}</p>
+    <a href="{% url 'posts:category_detail' category.pk %}">Ver posts da categoria</a>
+  </article>
+{% empty %}<p>Ainda não há categorias cadastradas.</p>{% endfor %}</div>
+{% endblock %}

@@ -38,6 +38,7 @@
     <h1><a href="{% url 'posts:post_list' %}">Portfólio de Engenharia</a></h1>
     <nav aria-label="Navegação principal">
       <a href="{% url 'posts:post_list' %}">Projetos</a>
+      <a href="{% url 'posts:category_list' %}">Categorias</a>
       {% if user.is_authenticated %}
         {% if user.is_staff %}<a href="{% url 'posts:post_create' %}">Novo post</a><a href="{% url 'admin:index' %}">Admin</a>{% endif %}
         <span class="muted" style="color:#cbd5e1">{{ user.username }}</span>

@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 from .forms import CommentForm, PostForm
-from .models import Post
+from .models import Category, Post
 
 
 class StaffOnlyMixin(LoginRequiredMixin, UserPassesTestMixin):
@@ -75,3 +75,21 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         return reverse_lazy("posts:post_detail", kwargs={"pk": self.post.pk})
+
+
+class CategoryListView(ListView):
+    model = Category
+    template_name = "posts/category_list.html"
+    context_object_name = "categories"
+
+
+class CategoryDetailView(DetailView):
+    model = Category
+    template_name = "posts/post_list.html"  # reutiliza o template de posts
+    context_object_name = "category"  # 404 automatico para categoria inexistente
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["posts"] = self.object.posts.all().order_by("-published_at", "-id")
+        context["heading"] = f"Categoria: {self.object.name}"
+        return context
