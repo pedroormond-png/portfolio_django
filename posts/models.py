@@ -7,6 +7,7 @@ class Post(models.Model):
     title = models.CharField("titulo", max_length=200)
     content = models.TextField("conteudo HTML")
     published_at = models.DateTimeField("data da postagem", default=timezone.now)
+    categories = models.ManyToManyField("Category", related_name="posts", blank=True, verbose_name="categorias")
 
     class Meta:
         ordering = ["-published_at", "-id"]
@@ -30,3 +31,16 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"{self.author} - {self.post}"
+
+
+class Category(models.Model):
+    name = models.CharField("nome", max_length=120, unique=True)
+    description = models.TextField("descricao")
+
+    class Meta:
+        ordering = ["name"]
+        verbose_name = "categoria"
+        verbose_name_plural = "categorias"
+
+    def __str__(self):
+        return self.name

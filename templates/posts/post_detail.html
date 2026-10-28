@@ -5,9 +5,24 @@
   <p><a href="{% url 'posts:post_list' %}">← Voltar aos projetos</a></p>
   <h2>{{ post.title }}</h2>
   <p class="muted">Publicado em {{ post.published_at|date:"d/m/Y H:i" }}</p>
+  <div class="tag-list" aria-label="Categorias do post">
+    {% for category in post.categories.all %}
+      <a class="tag" href="{% url 'posts:category_detail' category.pk %}">{{ category.name }}</a>
+    {% empty %}<span class="muted">Sem categorias.</span>{% endfor %}
+  </div>
   <div class="post-content">{{ post.content|safe }}</div>
   {% if user.is_staff %}<div class="actions">
     <a class="button secondary" href="{% url 'posts:post_update' post.pk %}">Editar post</a>
     <a class="button danger" href="{% url 'posts:post_delete' post.pk %}">Excluir post</a>
   </div>{% endif %}
+<section class="comments">
+    <div class="page-head"><h3>Comentários ({{ comments|length }})</h3>
+      <a class="button" href="{% url 'posts:comment_create' post.pk %}">Escrever comentário</a>
+    </div>
+    {% for comment in comments %}
+      <div class="comment"><strong>{{ comment.author.username }}</strong>
+        <span class="muted"> · {{ comment.created_at|date:"d/m/Y H:i" }}</span>
+        <p>{{ comment.text }}</p></div>
+    {% empty %}<p class="muted">Este post ainda não tem comentários.</p>{% endfor %}
+  </section>
 </article>{% endblock %}
