@@ -10,3 +10,14 @@ class PostForm(forms.ModelForm):
         fields = ["title", "content"]
         widgets = {"content": forms.Textarea(attrs={"rows": 12})}
         labels = {"title": "Título", "content": "Conteúdo HTML"}
+
+
+from .models import Comment
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ["text"]
+        labels = {"text": "Comentário"}
+        widgets = {"text": forms.Textarea(attrs={"rows": 5})}

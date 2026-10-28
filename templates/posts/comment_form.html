@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Novo comentário · Portfólio{% endblock %}
+{% block content %}<section class="panel">
+  <h2>Comentar: {{ post.title }}</h2>
+  <p class="muted">Seu comentário será publicado como {{ user.username }}.</p>
+  <form method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <button class="button" type="submit">Publicar comentário</button>
+    <a class="button secondary" href="{% url 'posts:post_detail' post.pk %}">Cancelar</a>
+  </form>
+</section>{% endblock %}
