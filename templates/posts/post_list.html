@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}{{ heading|default:"Projetos" }} · Portfólio{% endblock %}
+{% block content %}
+<div class="page-head"><div>
+  <h2>{{ heading|default:"Projetos de Engenharia" }}</h2>
+  <p class="muted intro">{{ category.description|default:"Projetos acadêmicos, relatos e estudos de engenharia." }}</p>
+</div>{% if user.is_staff %}<a class="button" href="{% url 'posts:post_create' %}">+ Novo post</a>{% endif %}</div>
+<div class="grid">
+{% for post in posts %}
+  <article class="card">
+    <h3><a href="{% url 'posts:post_detail' post.pk %}">{{ post.title }}</a></h3>
+    <span class="muted">Publicado em {{ post.published_at|date:"d/m/Y H:i" }}</span>
+    <div class="actions">
+      <a href="{% url 'posts:post_detail' post.pk %}">Ver projeto</a>
+      {% if user.is_staff %}
+        <a href="{% url 'posts:post_update' post.pk %}">Editar</a>
+        <a href="{% url 'posts:post_delete' post.pk %}">Excluir</a>
+      {% endif %}
+    </div>
+  </article>
+{% empty %}<p>Nenhum projeto encontrado.</p>{% endfor %}
+</div>
+{% endblock %}

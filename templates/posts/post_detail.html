@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}{{ post.title }} · Portfólio{% endblock %}
+{% block content %}
+<article class="panel">
+  <p><a href="{% url 'posts:post_list' %}">← Voltar aos projetos</a></p>
+  <h2>{{ post.title }}</h2>
+  <p class="muted">Publicado em {{ post.published_at|date:"d/m/Y H:i" }}</p>
+  <div class="post-content">{{ post.content|safe }}</div>
+  {% if user.is_staff %}<div class="actions">
+    <a class="button secondary" href="{% url 'posts:post_update' post.pk %}">Editar post</a>
+    <a class="button danger" href="{% url 'posts:post_delete' post.pk %}">Excluir post</a>
+  </div>{% endif %}
+</article>{% endblock %}

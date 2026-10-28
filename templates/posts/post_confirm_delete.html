@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Confirmar exclusão · Portfólio{% endblock %}
+{% block content %}<section class="panel">
+  <h2>Confirmar exclusão</h2>
+  <p>Deseja realmente excluir o post <strong>{{ object.title }}</strong>?</p>
+  <p class="muted">Esta operação também remove os comentários associados.</p>
+  <form method="post">{% csrf_token %}
+    <button class="button danger" type="submit">Sim, excluir</button>
+    <a class="button secondary" href="{% url 'posts:post_detail' object.pk %}">Cancelar</a>
+  </form>
+</section>{% endblock %}

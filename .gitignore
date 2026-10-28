@@ -1,0 +1,13 @@
+# Requisito da segunda entrega: banco entregue separadamente, nao versionado.
+db.sqlite3
+*.sqlite3
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+*.log
+staticfiles/
+.pytest_cache/
+.DS_Store
